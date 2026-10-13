@@ -12,8 +12,8 @@ class ChickenOrEgg {
         @Override
         public void run() {
             for (int i = 0; i < times; i++) {
-                System.out.println(word); // println is thread-safe on its own
-                if (i < times - 1) {      // no pause after the final word
+                System.out.println(word);
+                if (i < times - 1) {
                     try {
                         Thread.sleep((long) (Math.random() * 100));
                     } catch (InterruptedException e) {
@@ -31,12 +31,10 @@ class ChickenOrEgg {
         chicken.start();
         egg.start();
 
-        // wait until at least one thread has finished
         while (chicken.isAlive() && egg.isAlive()) {
             Thread.sleep(1);
         }
 
-        // whoever is still alive spoke last
         String winner = chicken.isAlive() ? "Курица" : "Яйцо";
 
         chicken.join();
